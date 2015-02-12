@@ -10,7 +10,7 @@ function init() {
 
 function clickNsa() {
   var options = {enableHighAccuracy: true, timeout: 5000, maximumAge: 0};
-  nagivator.geolocation.getCurrentPosition(success, error, options);
+  navigator.geolocation.getCurrentPosition(success, error, options);
 }
 
 function success(pos) {
@@ -24,16 +24,17 @@ function error(err) {
 
 function clickGetCams() {
   var zipCode = $('#zip-code').val();
-  var url = 'http://api.wunderground.com/api/a26aaa5dfad38572/webcams/q' + zipcode + '.json'; //put the cams json url here
+  var url = 'http://api.wunderground.com/api/a26aaa5dfad38572/webcams/q/' + zipCode + '.json'; //put the cams json url here
   paint(url);
 }
 
 function paint(url) {
-  $.getJSON(url, function(response){
-    response.webcams.forEach(function(cam){
+  $.getJSON(url, function(response) {
+    console.log(response)
+    response.webcams.forEach(function(cam) {
       var $img = $('<div>');
-      $img.addClass('img');
-      $img.css('background-image', 'url("  ' + cam.CURRENTIMAGEURL + ' ")')
+      $img.addClass('image');
+      $img.css('background-image', 'url("  ' + cam.CURRENTIMAGEURL + ' ")');
       $('#images').append($img);
     });
   });
